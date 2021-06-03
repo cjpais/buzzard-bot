@@ -1,2 +1,5 @@
 python-telegram-bot
 bidict
+lxml
+jinja2
+pytz
