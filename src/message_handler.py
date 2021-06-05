@@ -72,7 +72,7 @@ def handle_message(bot, update: Update):
 
 
 def set_author_for_channel(bot, author, channel_id):
-    bot = Bot(bot.api_token)
+    bot = Bot(config.api_token)
 
     author_doesnt_exist = bot.db.get(author) is None
     channel_doesnt_exist = bot.db.inverse.get(channel_id) is None
