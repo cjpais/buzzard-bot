@@ -33,6 +33,7 @@ def handle_message(bot, update: Update):
         try:
             author = bot.db.inverse[channel_id]
         except KeyError:
+            # TODO would it make sense to send a message to the channel instead?
             print("No author for channel {}".format(channel_id))
             return
         author_dir = AUTHOR_DIR.format(author)

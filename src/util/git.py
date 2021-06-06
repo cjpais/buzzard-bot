@@ -2,6 +2,12 @@ import os
 
 from config import config, AUTHOR_DIR
 
+def switch_branch():
+    wd = os.getcwd()
+    os.chdir(config.git_dir)
+    os.system("git checkout {}".format(config.git_branch))
+    os.chdir(wd)
+
 def add_all_to_git(msg):
     wd = os.getcwd()
     os.chdir(config.git_dir)

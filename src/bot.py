@@ -3,6 +3,7 @@ import json
 
 from config import config, AUTHOR_DIR
 from message_handler import handle_message
+from util.git import switch_branch
 
 from telegram import Update
 from telegram.ext import Updater, MessageHandler, CallbackContext, Filters
@@ -42,6 +43,8 @@ class BuzzardBot():
         if not os.path.exists(config.bot_dir):
             os.makedirs(config.bot_dir)
 
+        # make sure we are on the right branch to load the db from
+        switch_branch()
         try:
             with open(config.db_file, 'r') as db_file:
                 raw_db = json.load(db_file)
