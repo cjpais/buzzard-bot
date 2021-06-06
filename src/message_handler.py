@@ -30,7 +30,11 @@ def handle_message(bot, update: Update):
         pass
     else:
         title = ""
-        author = bot.db.inverse[channel_id]
+        try:
+            author = bot.db.inverse[channel_id]
+        except KeyError:
+            print("No author for channel {}".format(channel_id))
+            return
         author_dir = AUTHOR_DIR.format(author)
 
         if reply_id:
@@ -68,7 +72,8 @@ def handle_message(bot, update: Update):
 
         f.close()
 
-        add_all_to_git("added {} from {}".format(message, author))
+        # TODO this should be title eventually
+        add_all_to_git("added new content from {}".format(author))
 
 
 def set_author_for_channel(bot, author, channel_id):
