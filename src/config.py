@@ -12,6 +12,8 @@ DB_FILE = BUZZARD_BOT_DIR + "/db.json"
 AUTHOR_DIR = BUZZARD_GIT_DIR + "/consumption/{}"
 PT = timezone("America/Los_Angeles")
 
+ALLOWED_AUTHORS = ["cj", "jonbo", "gorum", "kristen", "shahruz"]
+
 templateLoader = FileSystemLoader(searchpath="../templates")
 env = Environment(loader=templateLoader)
 

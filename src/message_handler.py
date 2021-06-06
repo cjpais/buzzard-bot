@@ -1,6 +1,6 @@
 import os
 
-from config import PT, AUTHOR_DIR, env, config
+from config import PT, AUTHOR_DIR, env, config, ALLOWED_AUTHORS
 from util.git import add_all_to_git, add_author_to_git
 
 from telegram import Update, Bot
@@ -25,7 +25,12 @@ def handle_message(bot, update: Update):
         command = message
         author = command.replace("/set ", "")
 
-        set_author_for_channel(bot, author, channel_id)
+        if author in ALLOWED_AUTHORS or config.git_branch != "main":
+            set_author_for_channel(bot, author, channel_id)
+        else:
+            tg_bot = Bot(config.api_token)
+            tg_bot.sendMessage(
+                channel_id, "Author {} Not Allowed".format(author))
     elif "/remove " in message:
         pass
     else:
