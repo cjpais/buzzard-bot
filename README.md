@@ -27,6 +27,7 @@ Before starting the bot there are a few requirements.
 
 1. Have a telegram bot API key
 2. Have write access to BUZZARD git repo
+3. Clone the BUZZARD Repo
 
 Once these requirements are gathered, you can feasibly start the bot.
 
@@ -45,10 +46,11 @@ Please note the environment variable name must be `BUZZARD_TG_BOT_TOKEN`
 
 There are multiple ways to run the bot.
 
-You can either run it on the "main" or "test" branch of BUZZARD
+You can either run it on the "main" or "test" branch of BUZZARD.
+You will also need to point it at your cloned BUZZARD Repo.
 
-* "main" - `python3 src/bot.py main`
-* "test" - `python3 src/bot.py test`
+* "main" - `python3 src/bot.py main <BUZZARD_REPO_PATH>`
+* "test" - `python3 src/bot.py test <BUZZARD_REPO_PATH>`
 
 ## Set-Up the Bot in Telegram Channel
 
