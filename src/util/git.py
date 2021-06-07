@@ -1,6 +1,6 @@
 import os
 
-from config import config, AUTHOR_DIR
+from config import config, AUTHOR_DIR, BUZZARD_GIT_SSH
 
 def switch_branch(branch = config.git_dir):
     """ 
@@ -41,3 +41,7 @@ def add_author_to_git(author):
     author_dir = AUTHOR_DIR.format(author)
     if not os.path.exists(author_dir):
         os.mkdir(author_dir)
+
+def clone_buzzard_repo():
+    """ Clones the BUZZARD repo locally """
+    os.system("git clone {}".format(BUZZARD_GIT_SSH))

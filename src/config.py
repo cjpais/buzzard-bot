@@ -7,9 +7,10 @@ from pytz import timezone
 # TODO this desperately needs to be handled via command line args
 
 BUZZARD_GIT_DIR = "../../BUZZARD"
-BUZZARD_BOT_DIR = BUZZARD_GIT_DIR + "/.tg_bot"
-DB_FILE = BUZZARD_BOT_DIR + "/db.json"
+BUZZARD_BOT_DIR = "{}/.tg_bot"
+DB_FILE = "{}/db.json"
 AUTHOR_DIR = BUZZARD_GIT_DIR + "/consumption/{}"
+BUZZARD_GIT_SSH = "git@github.com:calculator/BUZZARD.git"
 PT = timezone("America/Los_Angeles")
 
 ALLOWED_AUTHORS = ["cj", "jonbo", "gorum", "kristen", "shahruz"]
@@ -33,9 +34,9 @@ class BotConfig():
 
   def __init__(self):
     """ Initializes the Bot's Config """
-    self.git_dir = BUZZARD_GIT_DIR
-    self.bot_dir = BUZZARD_BOT_DIR
-    self.db_file = DB_FILE
+    self.git_dir = self._set_buzzard_git_dir()
+    self.bot_dir = BUZZARD_BOT_DIR.format(self.git_dir)
+    self.db_file = DB_FILE.format(self.bot_dir)
     self.api_token = self._get_api_token()
     self.git_branch = self._set_git_branch()
 
@@ -63,11 +64,23 @@ class BotConfig():
     
     return api_token
 
+  def _set_buzzard_git_dir(self):
+    """ 
+    Helper function to set the directory of the BUZZARD git repo from 
+    command line arguments
+    """
+    dir = BUZZARD_GIT_DIR
+
+    if len(sys.argv) >= 3:
+      dir = sys.argv[2]
+
+    return dir
+
   def _set_git_branch(self):
     """ Helper function to set the git branch from command line arguments """
     branch = "main"
 
-    if len(sys.argv) == 2:
+    if len(sys.argv) >= 2:
         if sys.argv[1] == "test" or sys.argv[1] == "main":
             branch = sys.argv[1]
         else:
