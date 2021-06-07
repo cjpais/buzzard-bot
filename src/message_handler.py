@@ -1,5 +1,4 @@
 import os
-from bot import BuzzardBot
 
 from config import PT, AUTHOR_DIR, env, config, ALLOWED_AUTHORS
 from util.git import add_all_to_git
@@ -53,7 +52,7 @@ class Message():
         except KeyError:
             self.author = None
 
-def dispatch(bot: BuzzardBot, update: Update):
+def dispatch(bot, update: Update):
     """
     Takes a Telegram Update delegates to the correct
     function to handle that update.
@@ -65,13 +64,13 @@ def dispatch(bot: BuzzardBot, update: Update):
     print(update)
 
     message = Message(bot, update)
+    text = message.text
 
-    if "/set " in message.text:
+    if "/set " in text:
         handle_set_command(message)
-    elif "/remove " in message:
+    elif "/remove " in text:
         handle_remove_command(message)
     else:
-        print("message", message.text)
         handle_message(message)
 
 def handle_set_command(message: Message):
@@ -126,7 +125,7 @@ def handle_reply_message(message: Message):
             "Could not find message {} for author {}".format(message.reply_id, message.author))
 
     with open(fn, 'a') as f:
-        f.write("\n\n_[{}]:_\n\n{}".format(message.date_string, message))
+        f.write("\n\n_[{}]:_\n\n{}".format(message.date_string, message.text))
 
 def handle_new_message(message: Message):
     """ 
@@ -139,7 +138,7 @@ def handle_new_message(message: Message):
     with open(fn, 'w') as f:
         template = env.get_template("tg-post.md")
         data = template.render(author=message.author,
-                                content=message)
+                                content=message.text)
         # content=message,
         # date=date_string)
         f.write(data)

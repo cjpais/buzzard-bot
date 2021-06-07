@@ -24,7 +24,7 @@ def set_author_for_channel(bot, author, channel_id):
         bot.save_db()
         add_author_to_git(author)
         tg_bot.sendMessage(
-            channel_id, "Author {} Successfully Added".format(author))
+            channel_id, "Author {} Successfully Added for branch {}".format(author, config.git_branch))
 
         add_all_to_git("Author {} added for channel {}".format(
             author, channel_id))

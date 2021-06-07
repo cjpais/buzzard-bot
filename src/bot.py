@@ -1,7 +1,7 @@
 import os
 import json
 
-import message_handler
+from message_handler import dispatch
 from config import config, AUTHOR_DIR
 from util.git import switch_branch
 
@@ -87,7 +87,7 @@ def handle_update(update: Update, context: CallbackContext) -> None:
     global bot
 
     # have the message handler dispatch the message
-    message_handler.dispatch(bot, update)
+    dispatch(bot, update)
 
 # create the bot
 bot = BuzzardBot()

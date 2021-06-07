@@ -2,7 +2,7 @@ import os
 
 from config import config, AUTHOR_DIR, BUZZARD_GIT_SSH
 
-def switch_branch(branch = config.git_dir):
+def switch_branch(branch = config.git_branch):
     """ 
     Change to the git branch as specified
 
