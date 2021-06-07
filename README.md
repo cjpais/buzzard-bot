@@ -25,9 +25,11 @@ post it on [BUZZARD](https://buzzard.life)
 
 Before starting the bot there are a few requirements.
 
-1. Have a telegram bot API key
-2. Have write access to BUZZARD git repo
-3. Clone the BUZZARD Repo
+1. Clone this repo
+   1. Install requirements
+2. Have a telegram bot API key
+3. Have write access to BUZZARD git repo
+4. Clone the BUZZARD Repo
 
 Once these requirements are gathered, you can feasibly start the bot.
 
@@ -41,6 +43,10 @@ The suggested way to do this is add the following to your `.bashrc` or `.zshrc`
 `echo export BUZZARD_TG_BOT_TOKEN="<YOUR_API_TOKEN>" >> ~/.zshrc`
 
 Please note the environment variable name must be `BUZZARD_TG_BOT_TOKEN`
+
+#### Install Python Requirements
+
+`pip3 install -r requirements.txt`
 
 ### Running it
 
